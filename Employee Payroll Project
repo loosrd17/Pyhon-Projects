@@ -1,0 +1,93 @@
+def input_int(prompt):
+    """Generic 'get integer with specified prompt' function; can be reused in other programs"""
+    return int(input(prompt))
+
+
+def input_deduction(emp_num, deduction_name):
+    # Define employee name and deduction type i.e.[Employee #12345] FICO:
+    return float(input(f'[Employee #{emp_num}] {deduction_name}: '))
+
+
+def get_deduction(emp_num, gross, deduction_name, prior_deductions):
+    # The prior_deductions were created to kick back any errors before going through all the data 
+    # Get a specific deduction for an employee and return the (validated) value
+    # If the value is invalid (because it is negative or exceeds the gross) then return None
+    deduction = input_deduction(emp_num, deduction_name)
+
+    # Conditionals:
+    #   Negative deduction value is invalid
+    #   Deduction value greater than the gross is invalid
+    #   Sum of all deductions greater than/equal to gross is invalid(net pay would be zero or neg)
+
+    # This single check covers two error cases:
+    #   1. This specific deduction was invalid (negative, or larger than the gross)
+    #   2. This deduction when combined with the other deductions is invalid (larger than the gross
+    running_deductions = deduction + prior_deductions
+    if deduction < 0 or running_deductions >= gross:
+        # If the caller receives None as the return value, it's a signal that the value was invalid
+        # and the input loop should restart after printing an error message Re:prior_deductions
+    # Validations passed, return the deduction amount requested
+    return deduction
+
+
+def print_employee_record(emp_num, gross, net_pay, state, federal, fico):
+    # Do final calculation of net pay
+    # Display values
+    # If displaying deductions must be valid due to prior_deductions and error check above 
+    net_pay = gross - state - federal - fico
+    print()
+    print(f'Employee #{emp_num}')
+    print(f'Gross:     ${gross}')
+    print(f'  Fed:    -${federal}')
+    print(f'  State:  -${state}')
+    print(f'  FICO:   -${fico}')
+    print(f'  Net:     ${net_pay}')
+    print()
+
+
+def get_employee_data(emp_number):
+    while True:
+        gross = input_deduction(emp_number, 'Gross')
+        if gross < 0:
+            print('ERROR: Invalid gross!')
+            return None
+
+    #Due to incremental tracking using the aforementioned error checks, if state/fed/FICO or
+    #sum of one or more is greater than gross a flag will be thrown up immediately
+
+        # Get state
+        state = get_deduction(emp_number, gross, 'State Tax', deductions)
+        if state is None:
+            print('INVALID DEDUCTIONS, PLEASE RE-ENTER DATA FOR EMPLOYEE #', emp_number)
+            continue
+        deductions += state
+
+        # Get federal
+        federal = get_deduction(emp_number, gross, 'Federal Tax', deductions)
+        if federal is None:
+            print('INVALID DEDUCTIONS, PLEASE RE-ENTER DATA FOR EMPLOYEE #', emp_number)
+            continue
+        deductions += federal
+
+        # Get FICO
+        fico = get_deduction(emp_number, gross, 'FICO', deductions)
+        if fico is None:
+            print('INVALID DEDUCTIONS, PLEASE RE-ENTER DATA FOR EMPLOYEE #', emp_number)
+            continue
+        deductions += fico
+
+        net_pay = gross - deductions
+        print_employee_record(emp_number, gross, net_pay, state, federal, fico)
+        return
+
+def main():
+    # Loop forever (until employee number 0 is entered)
+    while True:
+        emp_number = input_int("Employee number: ")
+        if emp_number == 0:
+            print('Exiting ...')
+            break
+        get_employee_data(emp_number)
+
+
+main()
