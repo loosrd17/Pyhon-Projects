@@ -1,2 +1,2 @@
 # Pyhon-Projects
-Application I have made in Python for my programming class
+Applications I have made in Python for my programming class
