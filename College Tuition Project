@@ -1,0 +1,29 @@
+#
+# College tuition is $8000/semester
+# The tuition will increase by 3% each year for the next 5 years
+# Display the semester tuition for each of the next 5 years
+#
+
+
+def main():
+    tuition = 8000
+    annual_increase = 0.05
+    increase_period = 5
+    this_year = 2022
+
+    print("Tuition for" , this_year , f"${tuition:.2f}")
+    # The tuition increases 5% annually from prior years tuition
+    for year_counter in range(1, increase_period):
+        # Calculate tuition increase for this year
+        # The increase amount grows each year on top of increase from prior year
+        # It's like compounded interest increase = tuition * annual_increase
+        # tuition += increase is short-hand equivalent to tuition = tuition + increase as covered in
+        # CSC 118-01-20220425 1600-1 @ 22m30s
+        tuition += increase
+        print(
+            "Tuition for",
+            this_year + year_counter,
+            f"${tuition:.2f} (increase of ${increase:.2f})",)
+
+
+main()
