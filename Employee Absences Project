@@ -1,0 +1,45 @@
+def input_int(prompt):
+    """Generic 'get integer with specified prompt' function; can be reused in other programs"""
+    return int(input(prompt))
+
+
+def calculate_average(num_list):
+    """Accepts a list of numeric values and returns the average"""
+    # Count how many values there are in the list of numeric values
+    num_count = len(num_list)
+    # Get the sum of those values
+    num_sum = sum(num_list)
+    # Return the average
+    return num_sum / num_count
+
+
+def get_employee_absences(employee_count):
+    # Using total_absences to keep a running sum of absences
+    total_absences = 0
+    for employee in range(employee_count):
+        absence = input_int(f"Absences for employee #{employee}: ")
+        # Input validation
+        if absence < 0:
+            print("ERROR: Negative numbers are invalid for absences!")
+            exit(1)
+        total_absences += absence
+    return total_absences
+
+
+def get_average(count, value):
+    return value / count
+
+
+def main():
+    num_employees = input_int("Number of employees: ")
+    # Input validation
+    if num_employees < 1:
+        print("ERROR: Must have at least 1 employee!")
+        return
+    num_absences = get_employee_absences(num_employees)
+    avg_absences = get_average(num_employees, num_absences)
+    print(f"Average: {avg_absences}")
+
+
+if __name__ == "__main__":
+    main()
