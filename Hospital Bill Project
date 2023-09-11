@@ -1,0 +1,48 @@
+
+def input_int(prompt):
+    """Generic 'get integer with specified prompt' function; can be reused in other programs"""
+    return int(input(prompt))
+
+
+def calc_cost(med_charges, service_charges, days=0, day_rate=0):
+    # A single function to calculate in-patient and out-patient stays
+    # By default, days and day_rate will be 0. This shows the bill for an out-patient
+    # stay without writing out specified days and day_rate arguments
+    #
+    # For in-patient stays, call it:
+    #   calc_cost(med_charged, service_charges, days, day_rate)
+    # For out-patient, call it:
+    #   calc_cost(med_charged, service_charges)
+    #
+    return med_charges + service_charges + (days * day_rate)
+
+
+def main():
+    stay_type = input("Type of Stay: Please choose I for in-patient or O for out-patient: ")
+
+    if stay_type != "I" and stay_type != "O":
+        print("Invalid stay type!")
+        # Return from the function
+        return
+
+    # Because of the above check, we know now that the stay_type is either O or I
+    # Both stay_type values require medication and service charges, so get them
+    med_charges = input_int('Total medication charges: ')
+    service_charges = input_int('Total hospital service charges: ')
+
+    if stay_type == "I":
+        # Only in-patient stays need these costs
+        stay_days = input_int('Duration of stay in days: ')
+        day_rate = input_int('Daily billing rate: ')
+        total_cost = calc_cost(med_charges, service_charges, stay_days, day_rate)
+    else:
+        # Out-patient doesn't have any stay_days or day_rate
+        # Use the same calc_cost() function, which has the default value
+        # of 0 for both the days and day_rate arguments when they aren't
+        # specified
+        total_cost = calc_cost(med_charges, service_charges)
+
+    print('The total cost of this stay is', total_cost)
+
+
+main()
