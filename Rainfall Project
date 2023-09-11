@@ -1,0 +1,44 @@
+#
+# Nested loops to gather rainfall in monthly intervals over a period of years
+# Sum and average the rainfall amounts at the end
+#
+
+
+def input_float(prompt):
+    """Generic 'get integer with specified prompt' function; can be reused in other assignments"""
+    return float(input(prompt))
+
+
+def input_int(prompt):
+    """Generic 'get integer with specified prompt' function; can be reused in other assignments"""
+    return int(input(prompt))
+
+
+def main():
+    start_year = 2022
+    year_count = input_int("Please enter number of years: ")
+    if year_count < 1:
+        print('ERROR: Must be at least one year!')
+        return
+
+    total_months = 0
+    total_rainfall = 0
+    for year in range(year_count):
+        current_year = start_year + year
+        for month_number in range(12):
+            # For only integers, use input_int() 
+            month_rainfall = input_float(
+              f" Inches for month {month_number} of year {current_year}: ")
+            # Pick one of the following, the smart way uses `+= 1`
+            # total_months = total_months + 1
+            total_months += 1
+            # Update the total rainfall and continue the loop
+            total_rainfall += month_rainfall
+
+    average_rainfall = total_rainfall / total_months
+    print("Total Months: ", total_months, "months")
+    print("Total Rainfall: ", total_rainfall, "inches")
+    print("Average Rainfall: ", average_rainfall, "inches")
+
+
+main()
