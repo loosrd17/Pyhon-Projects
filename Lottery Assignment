@@ -1,0 +1,37 @@
+# Generate a lottery number as a list of 7 random single digit integer values
+# Print each value from the list to the screen
+#
+
+# Python random module has a randint() function to generate a single random
+# number
+# https://docs.python.org/3/library/random.html#random.randint
+from random import randint
+
+
+def print_list_on_line(list_arg):
+    # Print each element of a list, all on a single line without spaces between them
+    # Example input: [0, 2, 3, 1, 4, 8, 7]
+    # Example output: 02314387
+    for value in list_arg:
+        # By specifying end='', we prevent it from making a newline after each character
+        # If you remove `end=''` you will get each value on a separate line
+        print(value, end="")
+    # Print a newline when done
+    print()
+
+
+def main():
+    # Total length of the lotto number, pick7
+    lotto_number_size = 7
+    # Create an empty list to start with
+    lotto_digit_list = []
+    for i in range(lotto_number_size):
+        # Generate a random number from 0-9 (inclusive)
+        lotto_digit = randint(0, 9)
+        lotto_digit_list.append(lotto_digit)
+    print("--- Lotto Number ---")
+    print_list_on_line(lotto_digit_list)
+
+
+if __name__ == "__main__":
+    main()
