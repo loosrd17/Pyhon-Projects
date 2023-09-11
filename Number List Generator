@@ -1,0 +1,84 @@
+
+# Program 1:
+#   Read a list of numbers from a file and print the sum to the screen
+#
+
+def read_integers(filename):
+    integer_list = []
+    # Open the file for reading
+    # Using `with` ensures it is closed implicitly, otherwise you would need
+    # to call fd.close() at the end
+    with open(filename) as fd:
+        # Loop over each line in the file
+        # Lines are determined by the presence of a single byte 'newline' character
+        for line in fd.readlines():
+            # IMPORTANT: The Python strip() method is used on string values to remove the 'newline'
+            #            character from a string. Without using strip(), int() will cause an exception
+            #            because the 'newline' character is not a valid integer
+            integer_list.append(int(line.strip()))
+    return integer_list
+
+
+def main():
+    filename = "numbers.txt"
+    num_list = read_integers(filename)
+    # Get the sum of the values
+    # Python has the built-in sum() function which accepts a list of numeric values
+    # and returns the sum
+    # Example of using it with fixed values instead of a variable:
+    #   test_sum = sum([1,2,3,4])
+    num_sum = sum(num_list)
+    print("The sum of all numbers is", num_sum)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+# Program 2
+# Read a list of numbers from a file and print the sum to the screen
+#
+
+def read_integers(filename):
+    integer_list = []
+    # Open the file for reading
+    with open(filename) as fd:
+        # Loop over each line in the file
+        for line in fd.readlines():
+            # IMPORTANT: The strip() method is used to remove the 'newline' character
+            #            that each line has at the end. Otherwise int() will crash, because
+            #            the 'newline' character is not a valid integer
+            integer_list.append(int(line.strip()))
+    return integer_list
+
+
+def calculate_average(num_list):
+    """Accepts a list of numeric values and returns the average"""
+    # Count how many values there are in the list of numeric values
+    num_count = len(num_list)
+
+    # Get the sum of the values
+    num_sum = sum(num_list)
+    # num_sum = 0
+    # for value in num_list:
+    #     num_sum += value
+
+    # Finally, return the average
+    return num_sum / num_count
+
+
+def main():
+    filename = "numbers.txt"
+    # To test when you don't have a file on the filesystem, you can comment out the next
+    # line and uncomment the one after it
+    integer_list = read_integers(filename)
+    # integer_list = [1, 3, 17, 3, 5, 20, 16, 31]
+    average = calculate_average(integer_list)
+    num_sum = sum(integer_list)
+    print("The sum of all numbers is", num_sum)
+    print("The average of all numbers is", average)
+
+
+if __name__ == "__main__":
+    main()
