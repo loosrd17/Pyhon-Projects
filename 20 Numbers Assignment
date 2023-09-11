@@ -1,0 +1,55 @@
+# Ask the user for a series of 20 numbers
+# As output, display the following:
+#   - Lowest number in the list
+#   - Highest number in the list
+#   - Total of the numbers in the list
+#   - The average of the numbers in the list
+#
+# We will borrow from the other assignments (called "code reuse")
+# This is one of the main values of using functions- they can be easily reused
+#
+
+
+def input_int(prompt):
+    """Generic 'get integer with specified prompt' function; can be reused in other assignments"""
+    return int(input(prompt))
+
+
+def calculate_average(num_list):
+    # Accepts a list of numeric values and returns the average
+    # This was copied from the solution to assignment 7, program 2
+    # Count how many values there are in the list of numeric values
+    num_count = len(num_list)
+    num_sum = sum(num_list)
+    return num_sum / num_count
+
+
+def main():
+    number_count = 20
+    num_list = []
+    print('Please enter 20 numbers')
+    for counter in range(number_count):
+        number = input_int(f"Enter number #{counter}: ")
+        num_list.append(number)
+
+    # NOTE: This is an alternate way to get the min/max values
+    # It's not the best way though, use min() and max() as below, instead
+    # lowest = sorted(num_list)[0]
+    # highest = sorted(num_list)[-1]
+
+    # Get the smallest number using Python built-in min() function
+    lowest = min(num_list)
+    # Get the largest number using Python built-in max() function
+    highest = max(num_list)
+    # Get the sum of numbers using Python built-in sum() function
+    total = sum(num_list)
+    # Get the average using our function from assignment 7 program 2
+    average = calculate_average(num_list)
+    print("Lowest Value:      ", lowest)
+    print("Highest Value:     ", highest)
+    print("Total of Values:   ", total)
+    print("Average of Values: ", average)
+
+
+if __name__ == "__main__":
+    main()
