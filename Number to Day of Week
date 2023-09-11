@@ -1,0 +1,36 @@
+#
+# Prompt user for a number from 1-7 that correspond to days of the week
+# Print the day of the week, or print an error message if the number
+# is invalid
+#
+
+
+def input_int(prompt):
+    """Generic 'get integer with specified prompt' function; can be reused in other assignments"""
+    return int(input(prompt))
+
+
+def main():
+    print("1=Monday, 2=Tuesday, ..., 7=Sunday")
+
+    day_number = input_int("Please enter a day of the week: ")
+
+    if day_number == 1:
+        print("You chose Monday")
+    elif day_number == 2:
+        print("You chose Tuesday")
+    elif day_number == 3:
+        print("You chose Wednesday")
+    elif day_number == 4:
+        print("You chose Thursday")
+    elif day_number == 5:
+        print("You chose Friday")
+    elif day_number == 6:
+        print("You chose Saturday")
+    elif day_number == 7:
+        print("You chose Sunday")
+    else:
+        print("Invalid day", day_number, "chosen!")
+
+
+main()
